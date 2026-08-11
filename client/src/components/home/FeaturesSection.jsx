@@ -1,3 +1,4 @@
+
 import {
   FaShippingFast,
   FaUndoAlt,
@@ -7,22 +8,22 @@ import {
 
 const features = [
   {
-    icon: <FaShippingFast size={34} />,
+    icon: <FaShippingFast size={30} />,
     title: "Free Shipping",
     description: "Free delivery on orders above ₹999.",
   },
   {
-    icon: <FaLock size={34} />,
+    icon: <FaLock size={30} />,
     title: "Secure Payment",
     description: "100% secure online payment gateway.",
   },
   {
-    icon: <FaUndoAlt size={34} />,
+    icon: <FaUndoAlt size={30} />,
     title: "Easy Returns",
     description: "30-day hassle-free return policy.",
   },
   {
-    icon: <FaHeadset size={34} />,
+    icon: <FaHeadset size={30} />,
     title: "24/7 Support",
     description: "Our experts are always ready to help.",
   },
@@ -30,45 +31,162 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="bg-white py-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-gradient-to-b from-gray-50 to-white py-16 md:py-20">
 
-        <div className="text-center mb-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <p className="text-blue-600 font-semibold uppercase tracking-widest">
+        {/* Section Header */}
+        <div className="text-center mb-12 md:mb-16">
+
+          <span className="
+            inline-block
+            bg-blue-50
+            text-blue-600
+            px-4
+            py-2
+            rounded-full
+            text-xs
+            sm:text-sm
+            font-bold
+            uppercase
+            tracking-widest
+          ">
             Why Shop With Us
-          </p>
+          </span>
 
-          <h2 className="text-4xl font-bold mt-3">
+          <h2 className="
+            text-3xl
+            sm:text-4xl
+            lg:text-5xl
+            font-extrabold
+            text-gray-900
+            mt-5
+          ">
             Premium Shopping Experience
           </h2>
 
-          <p className="text-gray-500 mt-5 max-w-2xl mx-auto">
+          <p className="
+            text-gray-500
+            mt-4
+            max-w-2xl
+            mx-auto
+            text-sm
+            sm:text-base
+            md:text-lg
+            leading-7
+          ">
             We provide everything you need for a safe,
             fast and enjoyable online shopping experience.
           </p>
 
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+
+        {/* Feature Cards */}
+        <div className="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-4
+          gap-5
+          lg:gap-6
+        ">
 
           {features.map((item, index) => (
             <div
               key={index}
-              className="group bg-gray-50 rounded-3xl p-8 shadow-sm hover:shadow-2xl transition duration-300 hover:-translate-y-3"
+              className="
+                group
+                relative
+                bg-white
+                rounded-2xl
+                p-7
+                border
+                border-gray-100
+                shadow-sm
+                hover:shadow-xl
+                hover:-translate-y-2
+                transition-all
+                duration-300
+                overflow-hidden
+              "
             >
 
-              <div className="w-20 h-20 rounded-2xl bg-blue-600 text-white flex items-center justify-center group-hover:scale-110 transition">
+              {/* Top Decorative Line */}
+              <div className="
+                absolute
+                top-0
+                left-0
+                w-full
+                h-1
+                bg-gradient-to-r
+                from-blue-500
+                to-indigo-500
+                scale-x-0
+                group-hover:scale-x-100
+                origin-left
+                transition-transform
+                duration-300
+              " />
+
+
+              {/* Icon */}
+              <div className="
+                w-16
+                h-16
+                rounded-2xl
+                bg-blue-600
+                text-white
+                flex
+                items-center
+                justify-center
+                shadow-lg
+                shadow-blue-100
+                group-hover:bg-blue-700
+                group-hover:scale-110
+                transition-all
+                duration-300
+              ">
                 {item.icon}
               </div>
 
-              <h3 className="text-2xl font-bold mt-8">
+
+              {/* Title */}
+              <h3 className="
+                text-xl
+                font-bold
+                text-gray-900
+                mt-6
+                group-hover:text-blue-600
+                transition-colors
+                duration-300
+              ">
                 {item.title}
               </h3>
 
-              <p className="text-gray-500 mt-4 leading-7">
+
+              {/* Description */}
+              <p className="
+                text-gray-500
+                mt-3
+                text-sm
+                leading-7
+              ">
                 {item.description}
               </p>
+
+
+              {/* Bottom Accent */}
+              <div className="
+                mt-6
+                w-8
+                h-1
+                rounded-full
+                bg-blue-600
+                group-hover:w-14
+                transition-all
+                duration-300
+              " />
 
             </div>
           ))}
@@ -76,8 +194,10 @@ const FeaturesSection = () => {
         </div>
 
       </div>
+
     </section>
   );
 };
 
 export default FeaturesSection;
+

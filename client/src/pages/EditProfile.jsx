@@ -1,6 +1,15 @@
+
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { User, Mail, Phone, Camera } from "lucide-react";
+import {
+  User,
+  Mail,
+  Phone,
+  Camera,
+  Save,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
 
 import {
   getProfile,
@@ -76,150 +85,205 @@ function EditProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
+    <div className="min-h-screen bg-gray-50 py-8 md:py-12 px-4">
 
-      <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+      <div className="max-w-3xl mx-auto">
 
-        <h1 className="text-3xl font-bold mb-8">
-          Edit Profile
-        </h1>
+        {/* Main Card */}
+        <div className="bg-white border border-gray-100 rounded-2xl shadow-sm overflow-hidden">
 
-        {error && (
-          <div className="mb-6 bg-red-100 text-red-600 p-3 rounded-lg">
-            {error}
-          </div>
-        )}
+          {/* Header */}
+          <div className="px-6 sm:px-8 py-6 border-b border-gray-100">
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-6"
-        >
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                <User size={22} />
+              </div>
 
-          {/* Avatar */}
+              <div>
+                <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+                  Edit Profile
+                </h1>
 
-          <div className="flex flex-col items-center">
-
-            <div className="relative">
-
-              <img
-                src={
-                  preview ||
-                  "https://ui-avatars.com/api/?name=User"
-                }
-                alt="Profile"
-                className="w-32 h-32 rounded-full object-cover border-4 border-blue-600"
-              />
-
-              <label className="absolute bottom-0 right-0 bg-blue-600 p-3 rounded-full text-white cursor-pointer">
-
-                <Camera size={18} />
-
-                <input
-                  type="file"
-                  hidden
-                  accept="image/*"
-                  onChange={handleImage}
-                />
-
-              </label>
-
+                <p className="text-sm text-gray-500 mt-1">
+                  Update your personal information.
+                </p>
+              </div>
             </div>
 
           </div>
 
-          {/* Name */}
+          <div className="p-6 sm:p-8">
 
-          <div>
+            {/* Error */}
+            {error && (
+              <div className="mb-6 flex items-center gap-3 bg-red-50 border border-red-100 text-red-600 p-4 rounded-xl">
+                <AlertCircle size={20} />
 
-            <label className="font-medium">
-              Full Name
-            </label>
+                <p className="text-sm font-medium">
+                  {error}
+                </p>
+              </div>
+            )}
 
-            <div className="relative mt-2">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
 
-              <User
-                className="absolute left-3 top-3 text-gray-400"
-                size={20}
-              />
+              {/* Avatar */}
+              <div className="flex flex-col items-center pb-2">
 
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full border rounded-lg py-3 pl-11 pr-4"
-                required
-              />
+                <div className="relative">
 
-            </div>
+                  <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-br from-blue-500 to-blue-200">
+
+                    <img
+                      src={
+                        preview ||
+                        "https://ui-avatars.com/api/?name=User"
+                      }
+                      alt="Profile"
+                      className="w-full h-full rounded-full object-cover border-4 border-white"
+                    />
+
+                  </div>
+
+                  <label className="absolute bottom-1 right-1 w-10 h-10 flex items-center justify-center bg-blue-600 hover:bg-blue-700 rounded-full text-white cursor-pointer shadow-md hover:shadow-lg transition-all duration-200">
+
+                    <Camera size={18} />
+
+                    <input
+                      type="file"
+                      hidden
+                      accept="image/*"
+                      onChange={handleImage}
+                    />
+
+                  </label>
+
+                </div>
+
+                <p className="text-xs text-gray-400 mt-3">
+                  Click the camera icon to change your photo
+                </p>
+
+              </div>
+
+              {/* Name */}
+              <div>
+
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Full Name
+                </label>
+
+                <div className="relative">
+
+                  <User
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    size={19}
+                  />
+
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 rounded-xl py-3 pl-11 pr-4 text-sm text-gray-800 outline-none transition-all duration-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+              {/* Email */}
+              <div>
+
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Email
+                </label>
+
+                <div className="relative">
+
+                  <Mail
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    size={19}
+                  />
+
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 rounded-xl py-3 pl-11 pr-4 text-sm text-gray-800 outline-none transition-all duration-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                    required
+                  />
+
+                </div>
+
+              </div>
+
+              {/* Phone */}
+              <div>
+
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Phone Number
+                </label>
+
+                <div className="relative">
+
+                  <Phone
+                    className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"
+                    size={19}
+                  />
+
+                  <input
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full border border-gray-200 rounded-xl py-3 pl-11 pr-4 text-sm text-gray-800 outline-none transition-all duration-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
+                  />
+
+                </div>
+
+              </div>
+
+              {/* Save Button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl font-semibold shadow-sm hover:shadow-md transition-all duration-200 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                    Updating...
+                  </>
+                ) : (
+                  <>
+                    <Save size={18} />
+                    Save Changes
+                  </>
+                )}
+              </button>
+
+            </form>
+
+            {/* Success */}
+            {success && (
+              <div className="mt-5 flex items-center gap-3 bg-green-50 border border-green-100 text-green-600 p-4 rounded-xl">
+                <CheckCircle2 size={20} />
+
+                <p className="text-sm font-medium">
+                  Profile updated successfully.
+                </p>
+              </div>
+            )}
 
           </div>
-
-          {/* Email */}
-
-          <div>
-
-            <label className="font-medium">
-              Email
-            </label>
-
-            <div className="relative mt-2">
-
-              <Mail
-                className="absolute left-3 top-3 text-gray-400"
-                size={20}
-              />
-
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full border rounded-lg py-3 pl-11 pr-4"
-                required
-              />
-
-            </div>
-
-          </div>
-
-          {/* Phone */}
-
-          <div>
-
-            <label className="font-medium">
-              Phone Number
-            </label>
-
-            <div className="relative mt-2">
-
-              <Phone
-                className="absolute left-3 top-3 text-gray-400"
-                size={20}
-              />
-
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full border rounded-lg py-3 pl-11 pr-4"
-              />
-
-            </div>
-
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition disabled:bg-gray-400"
-          >
-            {loading ? "Updating..." : "Save Changes"}
-          </button>
-
-        </form>
-
+        </div>
       </div>
 
     </div>
@@ -227,3 +291,4 @@ function EditProfile() {
 }
 
 export default EditProfile;
+

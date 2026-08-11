@@ -1,328 +1,3 @@
-// import { useState } from "react";
-// import {
-//   MapPin,
-//   Plus,
-//   Pencil,
-//   Trash2,
-//   Star,
-// } from "lucide-react";
-
-// function SavedAddresses() {
-//   const [addresses, setAddresses] = useState([
-//     {
-//       id: 1,
-//       fullName: "John Doe",
-//       phone: "9876543210",
-//       address: "221B Baker Street",
-//       city: "Mumbai",
-//       state: "Maharashtra",
-//       pincode: "400001",
-//       isDefault: true,
-//     },
-//   ]);
-
-//   const [form, setForm] = useState({
-//     fullName: "",
-//     phone: "",
-//     address: "",
-//     city: "",
-//     state: "",
-//     pincode: "",
-//   });
-
-//   const [editingId, setEditingId] = useState(null);
-
-//   const handleChange = (e) => {
-//     setForm({
-//       ...form,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const resetForm = () => {
-//     setForm({
-//       fullName: "",
-//       phone: "",
-//       address: "",
-//       city: "",
-//       state: "",
-//       pincode: "",
-//     });
-
-//     setEditingId(null);
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     if (editingId) {
-//       setAddresses(
-//         addresses.map((item) =>
-//           item.id === editingId
-//             ? { ...item, ...form }
-//             : item
-//         )
-//       );
-//     } else {
-//       setAddresses([
-//         ...addresses,
-//         {
-//           id: Date.now(),
-//           ...form,
-//           isDefault: false,
-//         },
-//       ]);
-//     }
-
-//     resetForm();
-//   };
-
-//   const handleEdit = (address) => {
-//     setEditingId(address.id);
-
-//     setForm({
-//       fullName: address.fullName,
-//       phone: address.phone,
-//       address: address.address,
-//       city: address.city,
-//       state: address.state,
-//       pincode: address.pincode,
-//     });
-//   };
-
-//   const handleDelete = (id) => {
-//     setAddresses(
-//       addresses.filter((item) => item.id !== id)
-//     );
-//   };
-
-//   const handleDefault = (id) => {
-//     setAddresses(
-//       addresses.map((item) => ({
-//         ...item,
-//         isDefault: item.id === id,
-//       }))
-//     );
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 py-10">
-
-//       <div className="max-w-6xl mx-auto px-4">
-
-//         <h1 className="text-3xl font-bold mb-8">
-//           Saved Addresses
-//         </h1>
-
-//         <div className="grid lg:grid-cols-2 gap-8">
-
-//           {/* Address Form */}
-
-//           <div className="bg-white rounded-2xl shadow-lg p-6">
-
-//             <h2 className="text-2xl font-bold mb-6">
-
-//               {editingId
-//                 ? "Edit Address"
-//                 : "Add New Address"}
-
-//             </h2>
-
-//             <form
-//               onSubmit={handleSubmit}
-//               className="space-y-4"
-//             >
-
-//               <input
-//                 type="text"
-//                 name="fullName"
-//                 placeholder="Full Name"
-//                 value={form.fullName}
-//                 onChange={handleChange}
-//                 className="w-full border rounded-lg p-3"
-//                 required
-//               />
-
-//               <input
-//                 type="text"
-//                 name="phone"
-//                 placeholder="Phone Number"
-//                 value={form.phone}
-//                 onChange={handleChange}
-//                 className="w-full border rounded-lg p-3"
-//                 required
-//               />
-
-//               <textarea
-//                 name="address"
-//                 placeholder="Street Address"
-//                 value={form.address}
-//                 onChange={handleChange}
-//                 rows={3}
-//                 className="w-full border rounded-lg p-3"
-//                 required
-//               />
-
-//               <input
-//                 type="text"
-//                 name="city"
-//                 placeholder="City"
-//                 value={form.city}
-//                 onChange={handleChange}
-//                 className="w-full border rounded-lg p-3"
-//                 required
-//               />
-
-//               <input
-//                 type="text"
-//                 name="state"
-//                 placeholder="State"
-//                 value={form.state}
-//                 onChange={handleChange}
-//                 className="w-full border rounded-lg p-3"
-//                 required
-//               />
-
-//               <input
-//                 type="text"
-//                 name="pincode"
-//                 placeholder="Pincode"
-//                 value={form.pincode}
-//                 onChange={handleChange}
-//                 className="w-full border rounded-lg p-3"
-//                 required
-//               />
-
-//               <button
-//                 type="submit"
-//                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg flex justify-center items-center gap-2"
-//               >
-//                 <Plus size={20} />
-
-//                 {editingId
-//                   ? "Update Address"
-//                   : "Add Address"}
-//               </button>
-
-//             </form>
-
-//           </div>
-
-//           {/* Address List */}
-
-//           <div className="space-y-5">
-
-//             {addresses.length === 0 ? (
-
-//               <div className="bg-white rounded-2xl shadow-lg p-10 text-center">
-
-//                 <MapPin
-//                   size={60}
-//                   className="mx-auto text-gray-300"
-//                 />
-
-//                 <h2 className="text-xl font-semibold mt-4">
-//                   No Saved Addresses
-//                 </h2>
-
-//               </div>
-
-//             ) : (
-
-//               addresses.map((address) => (
-
-//                 <div
-//                   key={address.id}
-//                   className="bg-white rounded-2xl shadow-lg p-6"
-//                 >
-
-//                   <div className="flex justify-between items-start">
-
-//                     <div>
-
-//                       <h3 className="text-xl font-bold">
-//                         {address.fullName}
-//                       </h3>
-
-//                       <p className="text-gray-500">
-//                         {address.phone}
-//                       </p>
-
-//                     </div>
-
-//                     {address.isDefault && (
-//                       <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
-//                         Default
-//                       </span>
-//                     )}
-
-//                   </div>
-
-//                   <p className="mt-4 text-gray-700 leading-7">
-//                     {address.address},
-//                     <br />
-//                     {address.city}, {address.state}
-//                     <br />
-//                     {address.pincode}
-//                   </p>
-
-//                   <div className="flex gap-3 mt-6 flex-wrap">
-
-//                     <button
-//                       onClick={() =>
-//                         handleEdit(address)
-//                       }
-//                       className="flex items-center gap-2 bg-blue-100 text-blue-600 px-4 py-2 rounded-lg"
-//                     >
-//                       <Pencil size={18} />
-//                       Edit
-//                     </button>
-
-//                     <button
-//                       onClick={() =>
-//                         handleDelete(address.id)
-//                       }
-//                       className="flex items-center gap-2 bg-red-100 text-red-600 px-4 py-2 rounded-lg"
-//                     >
-//                       <Trash2 size={18} />
-//                       Delete
-//                     </button>
-
-//                     {!address.isDefault && (
-//                       <button
-//                         onClick={() =>
-//                           handleDefault(address.id)
-//                         }
-//                         className="flex items-center gap-2 bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg"
-//                       >
-//                         <Star size={18} />
-//                         Set Default
-//                       </button>
-//                     )}
-
-//                   </div>
-
-//                 </div>
-
-//               ))
-
-//             )}
-
-//           </div>
-
-//         </div>
-
-//       </div>
-
-//     </div>
-//   );
-// }
-
-// export default SavedAddresses;
-
-
-
-
 import { useEffect, useState } from "react";
 
 import {
@@ -331,6 +6,11 @@ import {
   Pencil,
   Trash2,
   Star,
+  Home,
+  Phone,
+  Navigation,
+  CheckCircle2,
+  Loader2,
 } from "lucide-react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -343,40 +23,26 @@ import {
   setDefaultAddress,
 } from "../redux/userSlice";
 
-
-
 const Address = () => {
-
   const dispatch = useDispatch();
 
   const {
-    addresses,
+    addresses = [],
     loading,
   } = useSelector((state) => state.users);
-
-
 
   // ==========================================
   // FORM STATE
   // ==========================================
 
   const [form, setForm] = useState({
-
     fullName: "",
-
     phone: "",
-
     address: "",
-
     city: "",
-
     state: "",
-
     pincode: "",
-
   });
-
-
 
   // ==========================================
   // EDIT MODE
@@ -384,426 +50,652 @@ const Address = () => {
 
   const [editingId, setEditingId] = useState(null);
 
-
-
   // ==========================================
   // LOAD ADDRESSES
   // ==========================================
 
   useEffect(() => {
-
     dispatch(getAddresses());
-
   }, [dispatch]);
-
-
 
   // ==========================================
   // INPUT CHANGE
   // ==========================================
 
   const handleChange = (e) => {
-
     setForm({
-
       ...form,
-
       [e.target.name]: e.target.value,
-
     });
-
   };
-
-
 
   // ==========================================
   // RESET FORM
   // ==========================================
 
   const resetForm = () => {
-
     setForm({
-
       fullName: "",
-
       phone: "",
-
       address: "",
-
       city: "",
-
       state: "",
-
       pincode: "",
-
     });
 
     setEditingId(null);
-
   };
-
-
 
   // ==========================================
   // SUBMIT
   // ==========================================
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
 
     if (editingId) {
-
       dispatch(
-
         updateAddress({
-
           id: editingId,
-
           data: form,
-
         })
-
       );
-
     } else {
-
       dispatch(addAddress(form));
-
     }
 
     resetForm();
-
   };
-
-
 
   // ==========================================
   // EDIT ADDRESS
   // ==========================================
 
   const handleEdit = (item) => {
-
     setEditingId(item._id);
 
     setForm({
-
       fullName: item.fullName,
-
       phone: item.phone,
-
       address: item.address,
-
       city: item.city,
-
       state: item.state,
-
       pincode: item.pincode,
-
     });
 
     window.scrollTo({
-
       top: 0,
-
       behavior: "smooth",
-
     });
-
   };
-
-
 
   // ==========================================
   // DELETE ADDRESS
   // ==========================================
 
   const handleDelete = (id) => {
-
     if (!window.confirm("Delete this address?")) return;
 
     dispatch(deleteAddress(id));
-
   };
-
-
 
   // ==========================================
   // SET DEFAULT ADDRESS
   // ==========================================
 
   const handleDefault = (id) => {
-
     dispatch(setDefaultAddress(id));
-
   };
 
-
-
-  // ==========================================
-  // JSX CONTINUES IN PART 3D-2
-  // ==========================================
-
   return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-10">
 
-    <>
-      <div className="min-h-screen bg-gray-100 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-  <div className="max-w-6xl mx-auto px-4">
+        {/* ==========================================
+            PAGE HEADER
+        ========================================== */}
 
-    <h1 className="text-3xl font-bold mb-8">
-      Saved Addresses
-    </h1>
+        <div className="mb-10">
 
-    <div className="grid lg:grid-cols-2 gap-8">
+          <div className="flex items-center gap-3 mb-2">
 
-      {/* ===========================
-          ADDRESS FORM
-      ============================ */}
+            <div className="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200">
 
-      <div className="bg-white rounded-2xl shadow-lg p-6">
+              <MapPin
+                size={25}
+                className="text-white"
+              />
 
-        <h2 className="text-2xl font-bold mb-6">
+            </div>
 
-          {editingId
-            ? "Edit Address"
-            : "Add New Address"}
+            <div>
 
-        </h2>
+              <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
+                Saved Addresses
+              </h1>
 
-        <form
-          onSubmit={handleSubmit}
-          className="space-y-4"
-        >
+              <p className="text-gray-500 mt-1">
+                Manage your delivery addresses
+              </p>
 
-          <input
-            type="text"
-            name="fullName"
-            placeholder="Full Name"
-            value={form.fullName}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone Number"
-            value={form.phone}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-
-          <textarea
-            rows={3}
-            name="address"
-            placeholder="Street Address"
-            value={form.address}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-
-          <input
-            type="text"
-            name="city"
-            placeholder="City"
-            value={form.city}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-
-          <input
-            type="text"
-            name="state"
-            placeholder="State"
-            value={form.state}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-
-          <input
-            type="text"
-            name="pincode"
-            placeholder="Pincode"
-            value={form.pincode}
-            onChange={handleChange}
-            required
-            className="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"
-          />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white py-3 rounded-lg flex justify-center items-center gap-2 transition"
-          >
-
-            <Plus size={20} />
-
-            {loading
-              ? "Saving..."
-              : editingId
-              ? "Update Address"
-              : "Add Address"}
-
-          </button>
-
-        </form>
-
-      </div>
-
-      {/* ===========================
-          ADDRESS LIST
-      ============================ */}
-
-      <div className="space-y-5">
-
-        {loading ? (
-
-          <div className="bg-white rounded-2xl shadow-lg p-10 text-center">
-
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent mx-auto" />
-
-            <p className="mt-5 text-gray-500">
-              Loading addresses...
-            </p>
+            </div>
 
           </div>
 
-        ) : addresses.length === 0 ? (
+        </div>
 
-          <div className="bg-white rounded-2xl shadow-lg p-10 text-center">
+        {/* ==========================================
+            MAIN GRID
+        ========================================== */}
 
-            <MapPin
-              size={60}
-              className="mx-auto text-gray-300"
-            />
+        <div className="grid lg:grid-cols-5 gap-8">
 
-            <h2 className="text-xl font-semibold mt-5">
-              No Saved Addresses
-            </h2>
+          {/* ==========================================
+              ADDRESS FORM
+          ========================================== */}
 
-            <p className="text-gray-500 mt-2">
-              Add your first delivery address.
-            </p>
+          <div className="lg:col-span-2">
 
-          </div>
+            <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/60 border border-gray-100 overflow-hidden sticky top-6">
 
-        ) : (
+              {/* Form Header */}
 
-          addresses.map((item) => (
+              <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-6 text-white">
 
-            <div
-              key={item._id}
-              className="bg-white rounded-2xl shadow-lg p-6"
-            >
+                <div className="flex items-center gap-3">
 
-              <div className="flex justify-between items-start">
+                  <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center">
 
-                <div>
+                    {editingId ? (
+                      <Pencil size={21} />
+                    ) : (
+                      <Plus size={23} />
+                    )}
 
-                  <h3 className="text-xl font-bold">
+                  </div>
 
-                    {item.fullName}
+                  <div>
 
-                  </h3>
+                    <h2 className="text-xl font-bold">
+                      {editingId
+                        ? "Edit Address"
+                        : "Add New Address"}
+                    </h2>
 
-                  <p className="text-gray-500">
+                    <p className="text-blue-100 text-sm mt-1">
+                      {editingId
+                        ? "Update your delivery details"
+                        : "Add a new delivery location"}
+                    </p>
 
-                    {item.phone}
-
-                  </p>
+                  </div>
 
                 </div>
 
-                {item.isDefault && (
-
-                  <span className="bg-green-100 text-green-700 text-sm px-3 py-1 rounded-full">
-
-                    Default
-
-                  </span>
-
-                )}
-
               </div>
 
-              <p className="mt-4 text-gray-700 leading-7">
+              {/* Form */}
 
-                {item.address}
+              <form
+                onSubmit={handleSubmit}
+                className="p-6 space-y-5"
+              >
 
-                <br />
+                {/* Full Name */}
 
-                {item.city}, {item.state}
+                <div>
 
-                <br />
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Full Name
+                  </label>
 
-                {item.pincode}
+                  <div className="relative">
 
-              </p>
+                    <input
+                      type="text"
+                      name="fullName"
+                      placeholder="Enter full name"
+                      value={form.fullName}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition"
+                    />
 
-              <div className="flex flex-wrap gap-3 mt-6">
+                  </div>
 
-                <button
-                  onClick={() => handleEdit(item)}
-                  className="flex items-center gap-2 bg-blue-100 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-200 transition"
-                >
+                </div>
 
-                  <Pencil size={18} />
+                {/* Phone */}
 
-                  Edit
+                <div>
 
-                </button>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Phone Number
+                  </label>
 
-                <button
-                  onClick={() => handleDelete(item._id)}
-                  className="flex items-center gap-2 bg-red-100 text-red-600 px-4 py-2 rounded-lg hover:bg-red-200 transition"
-                >
+                  <div className="relative">
 
-                  <Trash2 size={18} />
+                    <Phone
+                      size={18}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    />
 
-                  Delete
+                    <input
+                      type="text"
+                      name="phone"
+                      placeholder="Enter phone number"
+                      value={form.phone}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition"
+                    />
 
-                </button>
+                  </div>
 
-                {!item.isDefault && (
+                </div>
+
+                {/* Address */}
+
+                <div>
+
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Street Address
+                  </label>
+
+                  <div className="relative">
+
+                    <Home
+                      size={18}
+                      className="absolute left-4 top-4 text-gray-400"
+                    />
+
+                    <textarea
+                      rows={3}
+                      name="address"
+                      placeholder="House no., street, area..."
+                      value={form.address}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition resize-none"
+                    />
+
+                  </div>
+
+                </div>
+
+                {/* City + State */}
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                  <div>
+
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      City
+                    </label>
+
+                    <input
+                      type="text"
+                      name="city"
+                      placeholder="City"
+                      value={form.city}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition"
+                    />
+
+                  </div>
+
+                  <div>
+
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      State
+                    </label>
+
+                    <input
+                      type="text"
+                      name="state"
+                      placeholder="State"
+                      value={form.state}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition"
+                    />
+
+                  </div>
+
+                </div>
+
+                {/* Pincode */}
+
+                <div>
+
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Pincode
+                  </label>
+
+                  <div className="relative">
+
+                    <Navigation
+                      size={18}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                    />
+
+                    <input
+                      type="text"
+                      name="pincode"
+                      placeholder="Enter pincode"
+                      value={form.pincode}
+                      onChange={handleChange}
+                      required
+                      className="w-full border border-gray-200 rounded-xl pl-11 pr-4 py-3.5 bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 outline-none transition"
+                    />
+
+                  </div>
+
+                </div>
+
+                {/* Buttons */}
+
+                <div className="pt-2 flex gap-3">
 
                   <button
-                    onClick={() => handleDefault(item._id)}
-                    className="flex items-center gap-2 bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg hover:bg-yellow-200 transition"
+                    type="submit"
+                    disabled={loading}
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-bold flex justify-center items-center gap-2 shadow-lg shadow-blue-200 transition-all duration-200"
                   >
 
-                    <Star size={18} />
+                    {loading ? (
+                      <>
+                        <Loader2
+                          size={20}
+                          className="animate-spin"
+                        />
 
-                    Set Default
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        {editingId ? (
+                          <Pencil size={19} />
+                        ) : (
+                          <Plus size={20} />
+                        )}
+
+                        {editingId
+                          ? "Update Address"
+                          : "Add Address"}
+                      </>
+                    )}
 
                   </button>
 
-                )}
+                  {editingId && (
+
+                    <button
+                      type="button"
+                      onClick={resetForm}
+                      className="px-5 py-3 rounded-xl border border-gray-200 text-gray-600 font-semibold hover:bg-gray-50 transition"
+                    >
+                      Cancel
+                    </button>
+
+                  )}
+
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+
+          {/* ==========================================
+              ADDRESS LIST
+          ========================================== */}
+
+          <div className="lg:col-span-3">
+
+            <div className="flex items-center justify-between mb-5">
+
+              <div>
+
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Your Addresses
+                </h2>
+
+                <p className="text-gray-500 text-sm mt-1">
+                  {addresses.length}{" "}
+                  {addresses.length === 1
+                    ? "address"
+                    : "addresses"}{" "}
+                  saved
+                </p>
 
               </div>
 
             </div>
 
-          ))
+            {/* Loading */}
 
-        )}
+            {loading ? (
+
+              <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-16 text-center">
+
+                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto">
+
+                  <Loader2
+                    size={30}
+                    className="text-blue-600 animate-spin"
+                  />
+
+                </div>
+
+                <p className="mt-5 text-gray-500 font-medium">
+                  Loading your addresses...
+                </p>
+
+              </div>
+
+            ) : addresses.length === 0 ? (
+
+              /* Empty State */
+
+              <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-12 text-center">
+
+                <div className="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto">
+
+                  <MapPin
+                    size={38}
+                    className="text-blue-400"
+                  />
+
+                </div>
+
+                <h2 className="text-2xl font-bold text-gray-800 mt-6">
+                  No Saved Addresses
+                </h2>
+
+                <p className="text-gray-500 mt-2 max-w-sm mx-auto">
+                  You don't have any saved delivery
+                  addresses yet. Add one using the form.
+                </p>
+
+              </div>
+
+            ) : (
+
+              <div className="grid md:grid-cols-2 gap-5">
+
+                {addresses.map((item) => (
+
+                  <div
+                    key={item._id}
+                    className={`
+                      relative
+                      bg-white
+                      rounded-3xl
+                      p-6
+                      border
+                      shadow-lg
+                      transition-all
+                      duration-300
+                      hover:-translate-y-1
+                      hover:shadow-xl
+                      ${
+                        item.isDefault
+                          ? "border-blue-300 ring-2 ring-blue-100"
+                          : "border-gray-100"
+                      }
+                    `}
+                  >
+
+                    {/* Default Badge */}
+
+                    {item.isDefault && (
+
+                      <div className="absolute top-5 right-5">
+
+                        <span className="inline-flex items-center gap-1.5 bg-green-100 text-green-700 text-xs font-bold px-3 py-1.5 rounded-full">
+
+                          <CheckCircle2 size={14} />
+
+                          Default
+                        </span>
+
+                      </div>
+
+                    )}
+
+                    {/* Address Header */}
+
+                    <div className="flex items-start gap-4 pr-20">
+
+                      <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center shrink-0">
+
+                        <Home
+                          size={22}
+                          className="text-blue-600"
+                        />
+
+                      </div>
+
+                      <div className="min-w-0">
+
+                        <h3 className="text-lg font-bold text-gray-900 truncate">
+                          {item.fullName}
+                        </h3>
+
+                        <div className="flex items-center gap-1.5 text-gray-500 mt-1">
+
+                          <Phone size={14} />
+
+                          <p className="text-sm">
+                            {item.phone}
+                          </p>
+
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                    {/* Address Details */}
+
+                    <div className="mt-5 bg-gray-50 rounded-2xl p-4">
+
+                      <div className="flex items-start gap-3">
+
+                        <MapPin
+                          size={18}
+                          className="text-blue-500 mt-0.5 shrink-0"
+                        />
+
+                        <p className="text-gray-700 text-sm leading-6">
+
+                          {item.address}
+
+                          <br />
+
+                          {item.city}, {item.state}
+
+                          <br />
+
+                          <span className="font-semibold text-gray-800">
+                            {item.pincode}
+                          </span>
+
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                    {/* Actions */}
+
+                    <div className="grid grid-cols-2 gap-2 mt-5">
+
+                      <button
+                        onClick={() => handleEdit(item)}
+                        className="flex items-center justify-center gap-2 bg-blue-50 text-blue-600 px-3 py-2.5 rounded-xl hover:bg-blue-100 font-semibold text-sm transition"
+                      >
+
+                        <Pencil size={16} />
+
+                        Edit
+
+                      </button>
+
+                      <button
+                        onClick={() =>
+                          handleDelete(item._id)
+                        }
+                        className="flex items-center justify-center gap-2 bg-red-50 text-red-600 px-3 py-2.5 rounded-xl hover:bg-red-100 font-semibold text-sm transition"
+                      >
+
+                        <Trash2 size={16} />
+
+                        Delete
+
+                      </button>
+
+                    </div>
+
+                    {!item.isDefault && (
+
+                      <button
+                        onClick={() =>
+                          handleDefault(item._id)
+                        }
+                        className="w-full mt-2 flex items-center justify-center gap-2 border border-yellow-200 bg-yellow-50 text-yellow-700 px-3 py-2.5 rounded-xl hover:bg-yellow-100 font-semibold text-sm transition"
+                      >
+
+                        <Star
+                          size={16}
+                        />
+
+                        Set as Default
+
+                      </button>
+
+                    )}
+
+                  </div>
+
+                ))}
+
+              </div>
+
+            )}
+
+          </div>
+
+        </div>
 
       </div>
 
     </div>
-
-  </div>
-
-</div>
-    </>
-
   );
-
 };
 
 export default Address;

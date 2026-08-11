@@ -1,21 +1,45 @@
 const Loader = () => {
   return (
-    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-      {[...Array(6)].map((_, index) => (
+    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {[...Array(8)].map((_, index) => (
         <div
           key={index}
-          className="bg-white rounded-xl shadow animate-pulse overflow-hidden"
+          className="
+            bg-white
+            rounded-2xl
+            border border-gray-100
+            shadow-sm
+            overflow-hidden
+            animate-pulse
+          "
         >
-          <div className="h-60 bg-gray-200"></div>
+          {/* Image Skeleton */}
+          <div className="h-64 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100"></div>
 
+          {/* Content Skeleton */}
           <div className="p-5 space-y-4">
-            <div className="h-5 bg-gray-200 rounded"></div>
 
-            <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+            {/* Category */}
+            <div className="h-3 bg-gray-200 rounded-full w-1/4"></div>
 
-            <div className="h-6 bg-gray-200 rounded w-1/3"></div>
+            {/* Product Title */}
+            <div className="space-y-2">
+              <div className="h-5 bg-gray-200 rounded-lg w-full"></div>
+              <div className="h-5 bg-gray-200 rounded-lg w-3/4"></div>
+            </div>
 
-            <div className="h-10 bg-gray-200 rounded"></div>
+            {/* Rating */}
+            <div className="flex gap-2">
+              <div className="h-4 bg-gray-200 rounded w-20"></div>
+              <div className="h-4 bg-gray-200 rounded w-10"></div>
+            </div>
+
+            {/* Price */}
+            <div className="h-7 bg-gray-200 rounded-lg w-2/5"></div>
+
+            {/* Button */}
+            <div className="h-11 bg-gray-200 rounded-xl w-full"></div>
+
           </div>
         </div>
       ))}

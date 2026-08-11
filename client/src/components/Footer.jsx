@@ -2,39 +2,50 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-indigo-950 via-blue-900 to-indigo-950 text-white">
+    <footer className="bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 text-white">
 
-      {/* Top */}
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      {/* Main Footer */}
+      <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
 
-        <div className="grid md:grid-cols-4 gap-12">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
 
-          {/* Logo */}
-          <div>
+          {/* Brand */}
+          <div className="lg:pr-8">
 
             <Link
               to="/"
-              className="text-4xl font-extrabold"
+              className="inline-block text-3xl lg:text-4xl font-extrabold tracking-tight hover:text-blue-300 transition"
             >
-              ShopVerse
+              Shop<span className="text-blue-400">Verse</span>
             </Link>
 
-            <p className="mt-6 text-blue-200 leading-8">
+            <p className="mt-5 text-sm lg:text-base text-slate-300 leading-7">
               Premium online shopping destination offering quality products,
               secure payments, fast delivery, and exceptional customer service.
             </p>
 
-            <div className="flex gap-4 mt-8">
+            {/* Social Icons */}
+            <div className="flex gap-3 mt-7">
 
               {["📘", "📸", "🐦", "💼"].map((icon, index) => (
-
                 <div
                   key={index}
-                  className="w-12 h-12 rounded-full bg-white/10 hover:bg-blue-600 cursor-pointer flex items-center justify-center text-xl transition"
+                  className="
+                    w-11 h-11
+                    rounded-xl
+                    bg-white/10
+                    border border-white/10
+                    hover:bg-blue-600
+                    hover:border-blue-500
+                    hover:-translate-y-1
+                    cursor-pointer
+                    flex items-center justify-center
+                    text-lg
+                    transition-all duration-300
+                  "
                 >
                   {icon}
                 </div>
-
               ))}
 
             </div>
@@ -44,38 +55,53 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
 
-            <h3 className="text-2xl font-bold mb-6">
+            <h3 className="text-lg font-bold mb-5">
               Quick Links
             </h3>
 
-            <ul className="space-y-4">
+            <ul className="space-y-3">
 
               <li>
-                <Link to="/" className="text-blue-200 hover:text-white transition">
+                <Link
+                  to="/"
+                  className="text-slate-300 hover:text-white hover:translate-x-1 inline-block transition"
+                >
                   Home
                 </Link>
               </li>
 
               <li>
-                <Link to="/shop" className="text-blue-200 hover:text-white transition">
+                <Link
+                  to="/shop"
+                  className="text-slate-300 hover:text-white hover:translate-x-1 inline-block transition"
+                >
                   Shop
                 </Link>
               </li>
 
               <li>
-                <Link to="/cart" className="text-blue-200 hover:text-white transition">
+                <Link
+                  to="/cart"
+                  className="text-slate-300 hover:text-white hover:translate-x-1 inline-block transition"
+                >
                   Cart
                 </Link>
               </li>
 
               <li>
-                <Link to="/wishlist" className="text-blue-200 hover:text-white transition">
+                <Link
+                  to="/wishlist"
+                  className="text-slate-300 hover:text-white hover:translate-x-1 inline-block transition"
+                >
                   Wishlist
                 </Link>
               </li>
 
               <li>
-                <Link to="/login" className="text-blue-200 hover:text-white transition">
+                <Link
+                  to="/login"
+                  className="text-slate-300 hover:text-white hover:translate-x-1 inline-block transition"
+                >
                   Login
                 </Link>
               </li>
@@ -87,11 +113,11 @@ const Footer = () => {
           {/* Customer Service */}
           <div>
 
-            <h3 className="text-2xl font-bold mb-6">
+            <h3 className="text-lg font-bold mb-5">
               Customer Service
             </h3>
 
-            <ul className="space-y-4 text-blue-200">
+            <ul className="space-y-3 text-slate-300">
 
               <li className="hover:text-white cursor-pointer transition">
                 Help Center
@@ -120,27 +146,31 @@ const Footer = () => {
           {/* Contact */}
           <div>
 
-            <h3 className="text-2xl font-bold mb-6">
-              Contact
+            <h3 className="text-lg font-bold mb-5">
+              Contact Us
             </h3>
 
-            <div className="space-y-5 text-blue-200">
+            <div className="space-y-4 text-slate-300 text-sm">
 
-              <p>
-                📍 Pune, Maharashtra, India
-              </p>
+              <div className="flex gap-3">
+                <span>📍</span>
+                <p>Pune, Maharashtra, India</p>
+              </div>
 
-              <p>
-                📞 +91 98765 43210
-              </p>
+              <div className="flex gap-3">
+                <span>📞</span>
+                <p>+91 98765 43210</p>
+              </div>
 
-              <p>
-                ✉ support@shopverse.com
-              </p>
+              <div className="flex gap-3">
+                <span>✉️</span>
+                <p>support@shopverse.com</p>
+              </div>
 
-              <p>
-                🕒 Mon - Sat : 9 AM - 8 PM
-              </p>
+              <div className="flex gap-3">
+                <span>🕒</span>
+                <p>Mon - Sat : 9 AM - 8 PM</p>
+              </div>
 
             </div>
 
@@ -153,38 +183,51 @@ const Footer = () => {
       {/* Divider */}
       <div className="border-t border-white/10"></div>
 
-      {/* Bottom */}
-      <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center">
+      {/* Bottom Footer */}
+      <div className="max-w-7xl mx-auto px-6 py-6">
 
-        <p className="text-blue-300 text-center md:text-left">
-          © {new Date().getFullYear()} ShopVerse. All Rights Reserved.
-        </p>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-5">
 
-        <div className="flex gap-6 mt-5 md:mt-0">
+          <p className="text-sm text-slate-400 text-center md:text-left">
+            © {new Date().getFullYear()} ShopVerse. All Rights Reserved.
+          </p>
 
-          <img
-            src="https://img.icons8.com/color/48/visa.png"
-            alt="Visa"
-            className="h-8"
-          />
+          {/* Payment Methods */}
+          <div className="flex items-center gap-3">
 
-          <img
-            src="https://img.icons8.com/color/48/mastercard.png"
-            alt="Mastercard"
-            className="h-8"
-          />
+            <div className="bg-white rounded-lg px-3 py-1.5 shadow-sm">
+              <img
+                src="https://img.icons8.com/color/48/visa.png"
+                alt="Visa"
+                className="h-6 w-auto"
+              />
+            </div>
 
-          <img
-            src="https://img.icons8.com/color/48/paypal.png"
-            alt="PayPal"
-            className="h-8"
-          />
+            <div className="bg-white rounded-lg px-3 py-1.5 shadow-sm">
+              <img
+                src="https://img.icons8.com/color/48/mastercard.png"
+                alt="Mastercard"
+                className="h-6 w-auto"
+              />
+            </div>
 
-          <img
-            src="https://img.icons8.com/color/48/google-pay.png"
-            alt="Google Pay"
-            className="h-8"
-          />
+            <div className="bg-white rounded-lg px-3 py-1.5 shadow-sm">
+              <img
+                src="https://img.icons8.com/color/48/paypal.png"
+                alt="PayPal"
+                className="h-6 w-auto"
+              />
+            </div>
+
+            <div className="bg-white rounded-lg px-3 py-1.5 shadow-sm">
+              <img
+                src="https://img.icons8.com/color/48/google-pay.png"
+                alt="Google Pay"
+                className="h-6 w-auto"
+              />
+            </div>
+
+          </div>
 
         </div>
 

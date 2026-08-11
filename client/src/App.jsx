@@ -264,21 +264,7 @@ element={<OrderDetails />}
   }
 />
 
-<Route
 
-path="/admin/orders"
-
-element={
-
-<AdminRoute>
-
-<OrderManagement/>
-
-</AdminRoute>
-
-}
-
-/>
 
 
 

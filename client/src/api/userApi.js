@@ -82,36 +82,36 @@ return axiosInstance.get(
 
 
 
-// Update Role
+// // Update Role
 
-export const updateUserRoleApi=(id,role)=>{
+// export const updateUserRoleApi=(id,role)=>{
 
-return axiosInstance.patch(
+// return axiosInstance.patch(
 
-`/users/role/${id}`,
+// `/users/role/${id}`,
 
-{
-role
-}
+// {
+// role
+// }
 
-);
+// );
 
-};
-
-
+// };
 
 
-// Delete User
 
-export const deleteUserApi=(id)=>{
 
-return axiosInstance.delete(
+// // Delete User
 
-`/users/${id}`
+// export const deleteUserApi=(id)=>{
 
-);
+// return axiosInstance.delete(
 
-};
+// `/users/${id}`
+
+// );
+
+// };
 
 
 
@@ -224,4 +224,58 @@ return axiosInstance.put(
 );
 
 
+};
+
+
+
+
+// ==========================================
+// ADMIN - GET ALL USERS
+// ==========================================
+export const getAllUsersApi = async () => {
+  const { data } = await axiosInstance.get("/users");
+  return data;
+};
+
+// ==========================================
+// ADMIN - GET USER BY ID
+// ==========================================
+export const getUserByIdApi = async (id) => {
+  const { data } = await axiosInstance.get(`/users/${id}`);
+  return data;
+};
+
+// ==========================================
+// ADMIN - BLOCK USER
+// ==========================================
+export const blockUserApi = async (id) => {
+  const { data } = await axiosInstance.patch(`/users/block/${id}`);
+  return data;
+};
+
+// ==========================================
+// ADMIN - UNBLOCK USER
+// ==========================================
+export const unblockUserApi = async (id) => {
+  const { data } = await axiosInstance.patch(`/users/unblock/${id}`);
+  return data;
+};
+
+// ==========================================
+// ADMIN - CHANGE USER ROLE
+// ==========================================
+export const updateUserRoleApi = async (id, role) => {
+  const { data } = await axiosInstance.patch(`/users/role/${id}`, {
+    role,
+  });
+
+  return data;
+};
+
+// ==========================================
+// ADMIN - DELETE USER
+// ==========================================
+export const deleteUserApi = async (id) => {
+  const { data } = await axiosInstance.delete(`/users/${id}`);
+  return data;
 };

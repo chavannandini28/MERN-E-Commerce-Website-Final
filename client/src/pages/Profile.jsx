@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -35,55 +36,115 @@ function Profile() {
     dispatch(getWishlist());
   }, [dispatch]);
 
-  if (profileLoading || orderLoading || wishlistLoading) {
+  if (
+    profileLoading ||
+    orderLoading ||
+    wishlistLoading
+  ) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <h2 className="text-2xl font-semibold">
-          Loading Dashboard...
-        </h2>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex items-center justify-center px-4">
+
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 px-10 py-12 text-center">
+
+          <div className="w-16 h-16 mx-auto mb-5 rounded-full border-4 border-blue-100 border-t-blue-600 animate-spin"></div>
+
+          <h2 className="text-xl font-bold text-gray-800">
+            Loading Dashboard...
+          </h2>
+
+          <p className="text-gray-500 text-sm mt-2">
+            Please wait while we load your account.
+          </p>
+
+        </div>
+
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-8 md:py-12">
 
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <h1 className="text-4xl font-bold mb-8">
-          My Account
-        </h1>
+        {/* Page Header */}
 
-        <div className="grid lg:grid-cols-4 gap-8">
+        <div className="mb-8">
+
+          <p className="text-blue-600 font-semibold text-sm uppercase tracking-wide">
+            Account Dashboard
+          </p>
+
+          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mt-1">
+            My Account
+          </h1>
+
+          <p className="text-gray-500 mt-2">
+            Manage your profile, orders, wishlist and more.
+          </p>
+
+        </div>
+
+        {/* Main Layout */}
+
+        <div className="grid lg:grid-cols-4 gap-6 lg:gap-8">
 
           {/* Sidebar */}
 
-          <ProfileSidebar />
+          <div className="lg:col-span-1">
+
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+
+              <ProfileSidebar />
+
+            </div>
+
+          </div>
 
           {/* Dashboard */}
 
-          <div className="lg:col-span-3 space-y-8">
+          <div className="lg:col-span-3 space-y-6">
 
             {/* Welcome Card */}
 
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-lg p-8 text-white">
+            <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 rounded-3xl shadow-xl p-6 md:p-8 text-white">
 
-              <div className="flex flex-col md:flex-row items-center gap-6">
+              {/* Decorative Circles */}
 
-                <img
-                  src={
-                    profile?.avatar?.url ||
-                    `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                      profile?.name || "User"
-                    )}`
-                  }
-                  alt="Profile"
-                  className="w-28 h-28 rounded-full border-4 border-white object-cover"
-                />
+              <div className="absolute -top-16 -right-16 w-48 h-48 bg-white/10 rounded-full"></div>
 
-                <div>
+              <div className="absolute -bottom-20 right-20 w-40 h-40 bg-white/5 rounded-full"></div>
 
-                  <h2 className="text-3xl font-bold">
+              <div className="relative flex flex-col md:flex-row items-center md:items-center gap-6">
+
+                {/* Avatar */}
+
+                <div className="relative flex-shrink-0">
+
+                  <img
+                    src={
+                      profile?.avatar?.url ||
+                      `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                        profile?.name || "User"
+                      )}&background=ffffff&color=2563eb&bold=true`
+                    }
+                    alt="Profile"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-full border-4 border-white/90 object-cover shadow-xl"
+                  />
+
+                  <div className="absolute bottom-1 right-1 w-5 h-5 bg-green-400 border-4 border-blue-700 rounded-full"></div>
+
+                </div>
+
+                {/* Profile Information */}
+
+                <div className="text-center md:text-left flex-1">
+
+                  <p className="text-blue-100 text-sm mb-1">
+                    Welcome back,
+                  </p>
+
+                  <h2 className="text-2xl md:text-3xl font-bold">
                     {profile?.name}
                   </h2>
 
@@ -91,11 +152,11 @@ function Profile() {
                     {profile?.email}
                   </p>
 
-                  <p className="text-blue-100">
+                  <p className="text-blue-100 text-sm">
                     {profile?.phone || "No phone number"}
                   </p>
 
-                  <div className="mt-4 inline-flex px-4 py-2 bg-white/20 rounded-full text-sm">
+                  <div className="mt-4 inline-flex px-4 py-1.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full text-sm font-medium">
                     {profile?.role}
                   </div>
 
@@ -107,26 +168,42 @@ function Profile() {
 
             {/* Statistics */}
 
-            <DashboardCards
-              orders={orders}
-              wishlist={items}
-            />
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-1">
+
+              <DashboardCards
+                orders={orders}
+                wishlist={items}
+              />
+
+            </div>
 
             {/* Recent Orders */}
 
-            <RecentOrders
-              orders={orders}
-            />
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+
+              <RecentOrders
+                orders={orders}
+              />
+
+            </div>
 
             {/* Wishlist */}
 
-            <WishlistPreview
-              wishlist={items}
-            />
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+
+              <WishlistPreview
+                wishlist={items}
+              />
+
+            </div>
 
             {/* Quick Actions */}
 
-            <QuickActions />
+            <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+
+              <QuickActions />
+
+            </div>
 
           </div>
 

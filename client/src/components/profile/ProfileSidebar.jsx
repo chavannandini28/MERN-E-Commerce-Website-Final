@@ -1,3 +1,4 @@
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -25,97 +26,400 @@ function ProfileSidebar() {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div className="
+      bg-white
+      rounded-3xl
+      shadow-xl
+      border
+      border-gray-100
+      overflow-hidden
+    ">
 
       {/* Profile Header */}
+      <div className="
+        relative
+        bg-gradient-to-br
+        from-blue-600
+        via-blue-700
+        to-indigo-800
+        px-6
+        pt-8
+        pb-7
+        text-center
+        overflow-hidden
+      ">
 
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-center">
+        {/* Decorative Circles */}
+        <div className="
+          absolute
+          -top-16
+          -right-16
+          w-40
+          h-40
+          bg-white/10
+          rounded-full
+        " />
 
-        <img
-          src={
-            user?.avatar?.url ||
-            `https://ui-avatars.com/api/?name=${encodeURIComponent(
-              user?.name || "User"
-            )}&background=2563eb&color=ffffff`
-          }
-          alt={user?.name}
-          className="w-28 h-28 rounded-full border-4 border-white mx-auto object-cover bg-white"
-        />
+        <div className="
+          absolute
+          -bottom-20
+          -left-16
+          w-44
+          h-44
+          bg-white/10
+          rounded-full
+        " />
 
-        <h2 className="text-2xl font-bold text-white mt-4">
+        {/* Avatar */}
+        <div className="relative inline-block">
+          <div className="
+            absolute
+            inset-0
+            rounded-full
+            bg-white/30
+            blur-md
+          " />
+
+          <img
+            src={
+              user?.avatar?.url ||
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                user?.name || "User"
+              )}&background=2563eb&color=ffffff`
+            }
+            alt={user?.name}
+            className="
+              relative
+              w-28
+              h-28
+              rounded-full
+              border-4
+              border-white
+              shadow-xl
+              mx-auto
+              object-cover
+              bg-white
+            "
+          />
+
+          {/* Online Indicator */}
+          <span className="
+            absolute
+            right-1
+            bottom-2
+            w-5
+            h-5
+            bg-green-400
+            border-4
+            border-white
+            rounded-full
+          " />
+        </div>
+
+        <h2 className="
+          text-2xl
+          font-extrabold
+          text-white
+          mt-5
+        ">
           {user?.name}
         </h2>
 
-        <p className="text-blue-100 mt-1 text-sm">
+        <p className="
+          text-blue-100
+          mt-1
+          text-sm
+          truncate
+        ">
           {user?.email}
         </p>
 
       </div>
 
       {/* Navigation */}
+      <div className="p-5">
 
-      <div className="p-5 space-y-2">
+        <p className="
+          text-xs
+          font-bold
+          uppercase
+          tracking-wider
+          text-gray-400
+          px-3
+          mb-3
+        ">
+          Account
+        </p>
 
-        <Link
-          to="/profile"
-          className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition"
-        >
-          <User size={20} />
-          Dashboard
-        </Link>
+        <div className="space-y-1.5">
 
-        <Link
-          to="/profile/edit"
-          className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition"
-        >
-          <User size={20} />
-          Edit Profile
-        </Link>
+          <Link
+            to="/profile"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+              px-4
+              py-3.5
+              rounded-xl
+              text-gray-700
+              font-medium
+              hover:bg-blue-50
+              hover:text-blue-600
+              transition-all
+              duration-200
+            "
+          >
+            <span className="
+              flex
+              items-center
+              justify-center
+              w-9
+              h-9
+              rounded-lg
+              bg-gray-100
+              text-gray-500
+              group-hover:bg-blue-100
+              group-hover:text-blue-600
+              transition
+            ">
+              <User size={19} />
+            </span>
 
-        <Link
-          to="/change-password"
-          className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition"
-        >
-          <Lock size={20} />
-          Change Password
-        </Link>
+            <span>Dashboard</span>
+          </Link>
 
-        <Link
-          to="/my-orders"
-          className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition"
-        >
-          <ShoppingBag size={20} />
-          My Orders
-        </Link>
+          <Link
+            to="/profile/edit"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+              px-4
+              py-3.5
+              rounded-xl
+              text-gray-700
+              font-medium
+              hover:bg-blue-50
+              hover:text-blue-600
+              transition-all
+              duration-200
+            "
+          >
+            <span className="
+              flex
+              items-center
+              justify-center
+              w-9
+              h-9
+              rounded-lg
+              bg-gray-100
+              text-gray-500
+              group-hover:bg-blue-100
+              group-hover:text-blue-600
+              transition
+            ">
+              <User size={19} />
+            </span>
 
-        <Link
-          to="/wishlist"
-          className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition"
-        >
-          <Heart size={20} />
-          Wishlist
-        </Link>
+            <span>Edit Profile</span>
+          </Link>
 
-        <Link
-          to="/saved-addresses"
-          className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition"
-        >
-          <MapPin size={20} />
-          Saved Addresses
-        </Link>
+          <Link
+            to="/change-password"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+              px-4
+              py-3.5
+              rounded-xl
+              text-gray-700
+              font-medium
+              hover:bg-blue-50
+              hover:text-blue-600
+              transition-all
+              duration-200
+            "
+          >
+            <span className="
+              flex
+              items-center
+              justify-center
+              w-9
+              h-9
+              rounded-lg
+              bg-gray-100
+              text-gray-500
+              group-hover:bg-blue-100
+              group-hover:text-blue-600
+              transition
+            ">
+              <Lock size={19} />
+            </span>
 
+            <span>Change Password</span>
+          </Link>
+
+          <Link
+            to="/my-orders"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+              px-4
+              py-3.5
+              rounded-xl
+              text-gray-700
+              font-medium
+              hover:bg-blue-50
+              hover:text-blue-600
+              transition-all
+              duration-200
+            "
+          >
+            <span className="
+              flex
+              items-center
+              justify-center
+              w-9
+              h-9
+              rounded-lg
+              bg-gray-100
+              text-gray-500
+              group-hover:bg-blue-100
+              group-hover:text-blue-600
+              transition
+            ">
+              <ShoppingBag size={19} />
+            </span>
+
+            <span>My Orders</span>
+          </Link>
+
+          <Link
+            to="/wishlist"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+              px-4
+              py-3.5
+              rounded-xl
+              text-gray-700
+              font-medium
+              hover:bg-blue-50
+              hover:text-blue-600
+              transition-all
+              duration-200
+            "
+          >
+            <span className="
+              flex
+              items-center
+              justify-center
+              w-9
+              h-9
+              rounded-lg
+              bg-gray-100
+              text-gray-500
+              group-hover:bg-blue-100
+              group-hover:text-blue-600
+              transition
+            ">
+              <Heart size={19} />
+            </span>
+
+            <span>Wishlist</span>
+          </Link>
+
+          <Link
+            to="/saved-addresses"
+            className="
+              group
+              flex
+              items-center
+              gap-3
+              px-4
+              py-3.5
+              rounded-xl
+              text-gray-700
+              font-medium
+              hover:bg-blue-50
+              hover:text-blue-600
+              transition-all
+              duration-200
+            "
+          >
+            <span className="
+              flex
+              items-center
+              justify-center
+              w-9
+              h-9
+              rounded-lg
+              bg-gray-100
+              text-gray-500
+              group-hover:bg-blue-100
+              group-hover:text-blue-600
+              transition
+            ">
+              <MapPin size={19} />
+            </span>
+
+            <span>Saved Addresses</span>
+          </Link>
+
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-100 my-5" />
+
+        {/* Logout */}
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 p-3 rounded-lg text-red-600 hover:bg-red-50 transition"
+          className="
+            group
+            w-full
+            flex
+            items-center
+            gap-3
+            px-4
+            py-3.5
+            rounded-xl
+            text-red-600
+            font-semibold
+            hover:bg-red-50
+            transition-all
+            duration-200
+          "
         >
-          <LogOut size={20} />
-          Logout
+          <span className="
+            flex
+            items-center
+            justify-center
+            w-9
+            h-9
+            rounded-lg
+            bg-red-50
+            group-hover:bg-red-100
+            transition
+          ">
+            <LogOut size={19} />
+          </span>
+
+          <span>Logout</span>
         </button>
 
       </div>
-
     </div>
   );
 }
 
 export default ProfileSidebar;
+
